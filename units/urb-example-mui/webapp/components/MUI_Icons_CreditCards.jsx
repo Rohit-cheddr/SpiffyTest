@@ -80,10 +80,5 @@ class MUI_Icons_CreditCards extends React.Component
 
 export default Relay.createContainer( MUI_Icons_CreditCards, {
   fragments: {
-    Viewer: ( ) => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous,
-      }
-    `,
   },
 } );

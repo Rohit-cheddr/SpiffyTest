@@ -54,7 +54,6 @@ class AppNavDrawer extends React.Component
           { NavMenuTitle }
         </div>
         <NavMenu
-          Viewer={ this.props.Viewer }
           value={ location.pathname }
           onChange={ onChangeList }
         />
@@ -70,10 +69,6 @@ AppNavDrawer.contextTypes = {
 
 export default Relay.createContainer( AppNavDrawer, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        ${ NavMenu.getFragment( 'Viewer' ) },
-      }
-    `,
+    
   },
 } )

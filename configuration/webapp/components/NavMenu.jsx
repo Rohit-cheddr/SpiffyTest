@@ -16,11 +16,6 @@ class NavMenu extends React.Component
       <ListItem primaryText="Home" value="/" />,
       <ListItem primaryText="Compendium" value="/compendiums" />,
     ];
-    if( ! this.props.Viewer.User_IsAnonymous )
-    {
-      nestedItems_Misc.push( <ListItem primaryText="User Profile" value="/User" /> )
-      nestedItems_Misc.push( <ListItem primaryText="Force Login" value="/ForceLogin" /> )
-    }
 
     return (
       <SelectableList
@@ -74,10 +69,6 @@ class NavMenu extends React.Component
 
 export default Relay.createContainer( NavMenu, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous,
-      }
-    `,
+    
   },
 } )

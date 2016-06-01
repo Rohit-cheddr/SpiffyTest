@@ -8,7 +8,6 @@ import log from './log.js';
 import path from 'path';
 import process from 'process';
 
-import auth from './auth'; // Authentication server
 import graphql from '../graphql/server'; // GraphQL server
 import serverExtensions from '../configuration/server/serverExtensions'
 import webapp from '../webapp/server'; // Isomorphic React server
@@ -66,8 +65,6 @@ router.on('stormpath.ready', function () {
   router.set( 'trust proxy', 'loopback' );
   router.set( 'x-powered-by', false );
 
-  // Authentication server
-  router.use( '/auth', auth );
   router.use( compression( ) );
 
   // GraphQL server
