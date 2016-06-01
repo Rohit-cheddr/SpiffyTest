@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
 import Button from 'react-native-button'
 import { Actions } from 'react-native-router-flux'
 
-import NetworkLayer from './NetworkLayer'
+import NetworkLayer from '../../../../app/NetworkLayer'
 
 const styles = StyleSheet.create( {
   container: {
@@ -78,19 +78,21 @@ export default class Login extends React.Component
 
           NetworkLayer.setUserTokens( user_token_1, responseData.User_Token2 )
           NetworkLayer.injectNetworkLayer( )
-          Actions.pop(  )
+          //Actions.pop(  )
         }
-
-        let errorMessage
-        if( responseData.error )
-          errorMessage = responseData.error
         else
-          errorMessage = "Login failed"
+        {
+          let errorMessage
+          if( responseData.error )
+            errorMessage = responseData.error
+          else
+            errorMessage = "Login failed"
 
-        this.setState( {
-          mode: mode_login_failed,
-          ErrorMessage: errorMessage,
-        } )
+          this.setState( {
+            mode: mode_login_failed,
+            ErrorMessage: errorMessage,
+          } )
+        }
       }
       else
         console.log( "Expired login event" )
