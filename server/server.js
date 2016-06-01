@@ -1,6 +1,7 @@
 /* @flow weak */
 
 import express from 'express';
+var stormpath = require('express-stormpath');
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import log from './log.js';
@@ -49,28 +50,36 @@ log.log( 'info', 'Starting application', {
 // Main router
 let router = express( );
 
-router.set( 'trust proxy', 'loopback' );
-router.set( 'x-powered-by', false );
+router.use(stormpath.init(router, {
+  apiKey: {
+    id: process.env.STORMPATH_CLIENT_APIKEY_ID,
+    secret: process.env.STORMPATH_CLIENT_APIKEY_SECRET
+  },
+  application: {
+    href: process.env.STORMPATH_APPLICATION_HREF
+  }
+}));
 
-router.use( compression( ) );
-router.use( cookieParser( ) );
+//let server = null;
 
-// GraphQL server
-router.use( '/graphql', graphql );
+router.on('stormpath.ready', function () {
+  router.set( 'trust proxy', 'loopback' );
+  router.set( 'x-powered-by', false );
 
-// Authentication server
-router.use( '/auth', auth );
+  // Authentication server
+  router.use( '/auth', auth );
+  router.use( compression( ) );
 
-// Static assets server
-let oneYear = 365*86400000;
-router.use( express.static( path.resolve( __dirname + '/../public/' ), { maxAge: oneYear } ) );
+  // GraphQL server
+  router.use( '/graphql', stormpath.loginRequired, graphql );
 
-// Add extensions - custom configurations
-serverExtensions( router )
+  // Add extensions - custom configurations
+  serverExtensions( router )
 
-// Application with routes
-router.use( '/*', webapp );
+  // Application with routes
+  router.use( '/*', stormpath.loginRequired,  webapp );
 
-let server = router.listen( process.env.PORT, process.env.HOST );
+  let server = router.listen( process.env.PORT, process.env.HOST );
+});
 
-export default server;
+//export default server;
