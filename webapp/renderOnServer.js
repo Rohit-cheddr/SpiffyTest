@@ -45,7 +45,7 @@ function reunderOnServerCorrectRequest( req, res, next, assetsPath, renderProps 
 {
   // create individual object manager for each request
   const objectManager = new ObjectManager( );
-  
+  objectManager.setReq(req);
   try
   {
 

@@ -111,7 +111,7 @@
     "rnpm-plugin-upgrade": "^0.26.0",
     "webpack-dev-server": "1.14.1"
   },
-  "name": "UniversalRelayBoilerplate",
+  "name": "Cheddr",
   "description": "Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Material-UI), Relay, GraphQL, JWT, Node.js, Apache Cassandra",
   "homepage": "http://codefoundries.com/products/starter-kit.html",
   "repository": {
@@ -119,6 +119,6 @@
     "url": "git+https://github.com/codefoundries/UniversalRelayBoilerplate.git"
   },
   "version": "6.3.0",
-  "private": false,
+  "private": true,
   "license": "MIT"
 }

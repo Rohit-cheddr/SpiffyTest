@@ -23,6 +23,7 @@ export default class ObjectManager
   {
     this.loadersSingle = { }
     this.loadersMultiple = { }
+    this.req = { }
   }
 
   static registerEntity( entityName: string, EntityType : any )
@@ -40,6 +41,16 @@ export default class ObjectManager
       TriggersForUpdate: [ ],
       TriggersForRemove: [ ]
     }
+  }
+  
+  setReq (request)
+  {
+    this.req = request;
+  }
+
+  getReq( )
+  {
+    return this.req;
   }
 
   static RegisterTriggerForAdd( entityName: string, handler: any )
