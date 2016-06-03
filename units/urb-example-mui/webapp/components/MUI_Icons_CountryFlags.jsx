@@ -57,10 +57,6 @@ class MUI_Icons_CountryFlags extends React.Component
 
 export default Relay.createContainer( MUI_Icons_CountryFlags, {
   fragments: {
-    Viewer: ( ) => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous,
-      }
-    `,
+    
   },
 } );

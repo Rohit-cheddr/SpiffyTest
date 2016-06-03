@@ -11,7 +11,6 @@ import withWidth, {LARGE, MEDIUM}  from '../scripts/withWidth';
 
 import AppNavDrawer from './AppNavDrawer.jsx';
 import ChromeHelmet from '../../configuration/webapp/components/ChromeHelmet.jsx';
-import ChromeRightIcon from '../../configuration/webapp/components/ChromeRightIcon.jsx';
 import Footer from '../../configuration/webapp/components/Footer.jsx';
 import { MainScreenTitle } from '../../configuration/webapp/components/ChromeSettings';
 import muiTheme from '../../configuration/webapp/muiTheme.js';
@@ -120,7 +119,6 @@ class Chrome extends React.Component
           onLeftIconButtonTouchTap={ this._handle_onTouchTap_NavigationToggle }
           title={ MainScreenTitle }
           zDepth={0}
-          iconElementRight={ <ChromeRightIcon Viewer={this.props.Viewer} /> }
           style={styles.appBar}
           showMenuIconButton={showMenuIconButton}
         />
@@ -130,7 +128,6 @@ class Chrome extends React.Component
           </div>
         </div>
         <AppNavDrawer
-          Viewer={ this.props.Viewer }
           style={styles.navDrawer}
           location={location}
           docked={docked}
@@ -139,7 +136,6 @@ class Chrome extends React.Component
           open={navDrawerOpen}
         />
         <Footer
-          Viewer={ this.props.Viewer }
           width={ this.props.width }
         />
       </div>
@@ -163,14 +159,6 @@ Chrome.childContextTypes = {
 export default Relay.createContainer( withWidth( )( Chrome ), {
 //export default Relay.createContainer( Chrome, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous,
-        User_Token2,
-        ${ ChromeRightIcon.getFragment( 'Viewer' ) },
-        ${ AppNavDrawer.getFragment( 'Viewer' ) },
-        ${ Footer.getFragment( 'Viewer' ) },
-      }
-    `,
+    
   },
 });

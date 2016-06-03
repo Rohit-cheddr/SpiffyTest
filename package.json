@@ -65,6 +65,7 @@
     "eslint-plugin-react": "5.1.1",
     "express": "4.13.4",
     "express-graphql": "0.5.3",
+    "express-stormpath": "^3.1.2",
     "extract-text-webpack-plugin": "1.0.1",
     "graphql": "0.6.0",
     "graphql-relay": "0.4.2",
@@ -80,6 +81,7 @@
     "nodemon": "1.9.2",
     "react": "15.0.2",
     "react-dimensions": "1.2.0",
+    "react-document-title": "^2.0.1",
     "react-dom": "15.0.2",
     "react-event-listener": "0.2.1",
     "react-helmet": "3.1.0",
@@ -94,6 +96,7 @@
     "react-relay": "0.9.0",
     "react-router": "2.4.1",
     "react-router-relay": "0.13.2",
+    "react-stormpath": "^1.2.1",
     "react-tap-event-plugin": "1.0.0",
     "relay-local-schema": "0.5.0",
     "replace": "0.3.0",
@@ -110,7 +113,7 @@
     "rnpm-plugin-upgrade": "^0.26.0",
     "webpack-dev-server": "1.14.1"
   },
-  "name": "UniversalRelayBoilerplate",
+  "name": "Cheddr",
   "description": "Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Material-UI), Relay, GraphQL, JWT, Node.js, Apache Cassandra",
   "homepage": "http://codefoundries.com/products/starter-kit.html",
   "repository": {
@@ -118,6 +121,6 @@
     "url": "git+https://github.com/codefoundries/UniversalRelayBoilerplate.git"
   },
   "version": "6.3.0",
-  "private": false,
+  "private": true,
   "license": "MIT"
 }

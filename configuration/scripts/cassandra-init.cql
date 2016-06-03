@@ -23,24 +23,6 @@ CREATE TABLE logs(
 
 
 
-CREATE TABLE "User"(
-  id uuid PRIMARY KEY,
-  "User_AccountName" varchar,
-  "User_AccountPassword" varchar,
-  "User_DisplayName" varchar,
-  "User_ProfilePhoto" varchar,
-  "User_Email" varchar,
-  "User_PhoneNumberMobile" varchar,
-  "User_Locale" varchar,
-  "User_Token2" varchar
-);
-
-CREATE INDEX "User_User_AccountName_ix"
-ON "User"( "User_AccountName" );
-
-
-
-
 
 CREATE TABLE "Compendium"(
   "id" uuid PRIMARY KEY,

@@ -1,13 +1,13 @@
 /* @flow weak */
 
 import express from 'express';
+var stormpath = require('express-stormpath');
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import log from './log.js';
 import path from 'path';
 import process from 'process';
 
-import auth from './auth'; // Authentication server
 import graphql from '../graphql/server'; // GraphQL server
 import serverExtensions from '../configuration/server/serverExtensions'
 import webapp from '../webapp/server'; // Isomorphic React server
@@ -49,28 +49,30 @@ log.log( 'info', 'Starting application', {
 // Main router
 let router = express( );
 
-router.set( 'trust proxy', 'loopback' );
-router.set( 'x-powered-by', false );
+router.use(stormpath.init(router, {
+  web: {
+    produces: ['application/json']
+  }
+}));
 
-router.use( compression( ) );
-router.use( cookieParser( ) );
+//let server = null;
 
-// GraphQL server
-router.use( '/graphql', graphql );
+router.on('stormpath.ready', function () {
+  router.set( 'trust proxy', 'loopback' );
+  router.set( 'x-powered-by', false );
 
-// Authentication server
-router.use( '/auth', auth );
+  router.use( compression( ) );
 
-// Static assets server
-let oneYear = 365*86400000;
-router.use( express.static( path.resolve( __dirname + '/../public/' ), { maxAge: oneYear } ) );
+  // GraphQL server
+  router.use( '/graphql', graphql );
 
-// Add extensions - custom configurations
-serverExtensions( router )
+  // Add extensions - custom configurations
+  serverExtensions( router )
 
-// Application with routes
-router.use( '/*', webapp );
+  // Application with routes
+  router.use( '/*', webapp );
 
-let server = router.listen( process.env.PORT, process.env.HOST );
+  let server = router.listen( process.env.PORT, process.env.HOST );
+});
 
-export default server;
+//export default server;

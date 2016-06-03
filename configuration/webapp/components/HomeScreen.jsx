@@ -83,10 +83,6 @@ class HomeScreen extends React.Component
 
 export default Relay.createContainer( HomeScreen, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous
-      }
-    `,
+    
   },
 });

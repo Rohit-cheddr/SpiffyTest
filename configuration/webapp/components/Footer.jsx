@@ -63,10 +63,5 @@ class Footer extends React.Component
 
 export default Relay.createContainer( Footer, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        User_IsAnonymous,
-      }
-    `,
   },
 } )
