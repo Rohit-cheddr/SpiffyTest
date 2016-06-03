@@ -9,7 +9,7 @@ import {spacing, typography, zIndex} from 'material-ui/styles';
 
 import { NavMenuTitle } from '../../configuration/webapp/components/ChromeSettings';
 import NavMenu from '../../configuration/webapp/components/NavMenu.jsx';
-
+import {LogoutLink, LoginLink} from 'react-stormpath';
 
 class AppNavDrawer extends React.Component
 {
@@ -57,6 +57,12 @@ class AppNavDrawer extends React.Component
           value={ location.pathname }
           onChange={ onChangeList }
         />
+        <div>
+          <LoginLink>Login</LoginLink>
+        </div>
+        <div>
+          <LogoutLink>Logout</LogoutLink>
+        </div>
       </Drawer>
     );
   }

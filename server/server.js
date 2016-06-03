@@ -50,12 +50,8 @@ log.log( 'info', 'Starting application', {
 let router = express( );
 
 router.use(stormpath.init(router, {
-  apiKey: {
-    id: process.env.STORMPATH_CLIENT_APIKEY_ID,
-    secret: process.env.STORMPATH_CLIENT_APIKEY_SECRET
-  },
-  application: {
-    href: process.env.STORMPATH_APPLICATION_HREF
+  web: {
+    produces: ['application/json']
   }
 }));
 
@@ -68,13 +64,13 @@ router.on('stormpath.ready', function () {
   router.use( compression( ) );
 
   // GraphQL server
-  router.use( '/graphql', stormpath.loginRequired, graphql );
+  router.use( '/graphql', graphql );
 
   // Add extensions - custom configurations
   serverExtensions( router )
 
   // Application with routes
-  router.use( '/*', stormpath.loginRequired,  webapp );
+  router.use( '/*', webapp );
 
   let server = router.listen( process.env.PORT, process.env.HOST );
 });

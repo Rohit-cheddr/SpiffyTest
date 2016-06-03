@@ -4,7 +4,8 @@ import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory, match, Router } from 'react-router';
+import { browserHistory, match } from 'react-router';
+import ReactStormpath, { Router } from 'react-stormpath';
 import Relay from 'react-relay';
 
 import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
@@ -37,12 +38,12 @@ environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
     credentials: 'same-origin',
   }
 ) );
+ReactStormpath.init();
+
 IsomorphicRelay.injectPreparedData(environment, data);
-
 const rootElement = document.getElementById('root');
-
 match( { routes, history: browserHistory }, ( error, redirectLocation, renderProps ) => {
   IsomorphicRouter.prepareInitialRender( environment, renderProps ).then( props => {
-    ReactDOM.render( <Router {...props} />, rootElement );
+    ReactDOM.render( <Router {...props} history={browserHistory} />, rootElement );
   } );
 } );
