@@ -1,7 +1,7 @@
 /* @flow weak */
 
 import express from 'express';
-var stormpath = require('express-stormpath');
+var jwt = require('express-jwt');
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import log from './log.js';
@@ -49,30 +49,27 @@ log.log( 'info', 'Starting application', {
 // Main router
 let router = express( );
 
-router.use(stormpath.init(router, {
-  web: {
-    produces: ['application/json']
-  }
-}));
-
 //let server = null;
 
-router.on('stormpath.ready', function () {
-  router.set( 'trust proxy', 'loopback' );
-  router.set( 'x-powered-by', false );
+router.set( 'trust proxy', 'loopback' );
+router.set( 'x-powered-by', false );
 
-  router.use( compression( ) );
+router.use( compression( ) );
 
-  // GraphQL server
-  router.use( '/graphql', graphql );
-
-  // Add extensions - custom configurations
-  serverExtensions( router )
-
-  // Application with routes
-  router.use( '/*', webapp );
-
-  let server = router.listen( process.env.PORT, process.env.HOST );
+var authenticate = jwt({
+  secret: new Buffer('2Nu3FeJXrtB--ov4vXDbjmzD9922JhvH2uhtlaZ6e5e3bWIvw206X1s2CPf156zb', 'base64'),
+  audience: 'LArWGs2yP8u1J9QJYGzpdsdnH3QO4WzX'
 });
 
-//export default server;
+// GraphQL server
+router.use( '/graphql', authenticate, graphql );
+
+// Add extensions - custom configurations
+serverExtensions( router )
+
+// Application with routes
+router.use( '/*', webapp );
+
+let server = router.listen( process.env.PORT, process.env.HOST );
+
+export default server;

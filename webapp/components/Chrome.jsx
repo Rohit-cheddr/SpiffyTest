@@ -15,6 +15,7 @@ import Footer from '../../configuration/webapp/components/Footer.jsx';
 import { MainScreenTitle } from '../../configuration/webapp/components/ChromeSettings';
 import muiTheme from '../../configuration/webapp/muiTheme.js';
 
+//import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 
 class Chrome extends React.Component
 {
@@ -134,6 +135,7 @@ class Chrome extends React.Component
           onRequestChangeNavDrawer={this._handle_RequestChangeNavDrawer}
           onChangeList={ this._handle_onChangeList_AppNavDrawer }
           open={navDrawerOpen}
+          lock={this.lock}
         />
         <Footer
           width={ this.props.width }

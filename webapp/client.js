@@ -4,8 +4,7 @@ import IsomorphicRelay from 'isomorphic-relay';
 import IsomorphicRouter from 'isomorphic-relay-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory, match } from 'react-router';
-import ReactStormpath, { Router } from 'react-stormpath';
+import { Router, browserHistory, match } from 'react-router';
 import Relay from 'react-relay';
 
 import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
@@ -30,15 +29,19 @@ const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent 
 // Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
 let GraphQL_URL = ( isoVars.PUBLIC_URL == null ) ? '/graphql' : isoVars.PUBLIC_URL + '/graphql';
 
+var token = localStorage.getItem('id_token');
+
 // Create Relay environment
 const environment = new Relay.Environment( );
 environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
-  GraphQL_URL,
-  {
-    credentials: 'same-origin',
-  }
-) );
-ReactStormpath.init();
+    GraphQL_URL,
+    {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    }
+  )
+);
 
 IsomorphicRelay.injectPreparedData(environment, data);
 const rootElement = document.getElementById('root');
