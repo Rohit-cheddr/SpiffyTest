@@ -10,12 +10,16 @@ import spacing from 'material-ui/styles/spacing';
 import withWidth, {LARGE, MEDIUM}  from '../scripts/withWidth';
 
 import AppNavDrawer from './AppNavDrawer.jsx';
+import UserAuth from './UserAuth.jsx';
 import ChromeHelmet from '../../configuration/webapp/components/ChromeHelmet.jsx';
 import Footer from '../../configuration/webapp/components/Footer.jsx';
 import { MainScreenTitle } from '../../configuration/webapp/components/ChromeSettings';
 import muiTheme from '../../configuration/webapp/muiTheme.js';
 
-//import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
+var canUseDOM = !!(
+  (typeof window !== 'undefined' &&
+  window.document && window.document.createElement)
+);
 
 class Chrome extends React.Component
 {
@@ -31,6 +35,29 @@ class Chrome extends React.Component
       muiTheme,
       { userAgent: navigator.userAgent }
     )
+  }
+  initLock () {
+    var Auth0Lock = require('auth0-lock');
+    this.lock = new Auth0Lock('LArWGs2yP8u1J9QJYGzpdsdnH3QO4WzX', 'cheddr.auth0.com');
+  }
+  componentWillMount() {
+    if(canUseDOM){
+      this.initLock();
+    }
+    else {
+      this.lock = {}
+      this.lock['show'] = (...args) => {
+        //this.forceUpdate();
+        this.initLock();
+        this.lock.show(...args);
+      }
+      this.lock['getProfile'] = (...args) => {
+        //this.forceUpdate();
+        this.initLock();
+        console.log(...args)
+        this.lock.getProfile(...args);
+      }
+    }
   }
 
   getChildContext( )
@@ -85,6 +112,13 @@ class Chrome extends React.Component
     return styles;
   }
 
+  logOut(){
+    //this.props.lock.logout({returnTo: "http://localhost:4444"});
+    localStorage.removeItem('id_token');
+    this.context.router.push('/');
+    console.log("logged out")
+  }
+
   render( )
   {
     const styles = this.getStyles( )
@@ -135,7 +169,7 @@ class Chrome extends React.Component
           onRequestChangeNavDrawer={this._handle_RequestChangeNavDrawer}
           onChangeList={ this._handle_onChangeList_AppNavDrawer }
           open={navDrawerOpen}
-          lock={this.lock}
+          UserAuth={(<UserAuth lock={this.lock} logOut={this.logOut.bind(this)} />)}
         />
         <Footer
           width={ this.props.width }
@@ -161,6 +195,6 @@ Chrome.childContextTypes = {
 export default Relay.createContainer( withWidth( )( Chrome ), {
 //export default Relay.createContainer( Chrome, {
   fragments: {
-    
+
   },
 });

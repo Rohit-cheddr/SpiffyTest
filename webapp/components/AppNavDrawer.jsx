@@ -18,12 +18,6 @@ class AppNavDrawer extends React.Component
     this.props.onRequestChangeNavDrawer(false);
   }
 
-  showLock = () => {
-    // We receive lock from the parent component in this case
-    // If you instantiate it in this component, just do this.lock.show()
-    this.props.lock.show();
-  }
-
   render( )
   {
     const {
@@ -33,8 +27,8 @@ class AppNavDrawer extends React.Component
       onChangeList,
       open,
       style,
+      UserAuth
     } = this.props;
-
     return (
       <Drawer
         style={style}
@@ -62,9 +56,7 @@ class AppNavDrawer extends React.Component
           value={ location.pathname }
           onChange={ onChangeList }
         />
-        <div className="login-box">
-          <a onClick={this.showLock}>Sign In</a>
-        </div>
+        {UserAuth}
       </Drawer>
     );
   }
@@ -77,6 +69,6 @@ AppNavDrawer.contextTypes = {
 
 export default Relay.createContainer( AppNavDrawer, {
   fragments: {
-    
+
   },
 } )

@@ -49,20 +49,18 @@ log.log( 'info', 'Starting application', {
 // Main router
 let router = express( );
 
-//let server = null;
-
 router.set( 'trust proxy', 'loopback' );
 router.set( 'x-powered-by', false );
 
 router.use( compression( ) );
 
 var authenticate = jwt({
-  secret: new Buffer('2Nu3FeJXrtB--ov4vXDbjmzD9922JhvH2uhtlaZ6e5e3bWIvw206X1s2CPf156zb', 'base64'),
-  audience: 'LArWGs2yP8u1J9QJYGzpdsdnH3QO4WzX'
+  secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
+  audience: process.env.AUTH0_CLIENT_ID
 });
 
 // GraphQL server
-router.use( '/graphql', authenticate, graphql );
+router.use( '/graphql', graphql );
 
 // Add extensions - custom configurations
 serverExtensions( router )

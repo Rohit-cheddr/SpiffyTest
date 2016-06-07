@@ -30,7 +30,6 @@ const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent 
 let GraphQL_URL = ( isoVars.PUBLIC_URL == null ) ? '/graphql' : isoVars.PUBLIC_URL + '/graphql';
 
 var token = localStorage.getItem('id_token');
-
 // Create Relay environment
 const environment = new Relay.Environment( );
 environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
