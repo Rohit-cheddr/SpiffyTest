@@ -1,13 +1,13 @@
 /* @flow weak */
 
 import express from 'express';
+var jwt = require('express-jwt');
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import log from './log.js';
 import path from 'path';
 import process from 'process';
 
-import auth from './auth'; // Authentication server
 import graphql from '../graphql/server'; // GraphQL server
 import serverExtensions from '../configuration/server/serverExtensions'
 import webapp from '../webapp/server'; // Isomorphic React server
@@ -53,17 +53,14 @@ router.set( 'trust proxy', 'loopback' );
 router.set( 'x-powered-by', false );
 
 router.use( compression( ) );
-router.use( cookieParser( ) );
+
+var authenticate = jwt({
+  secret: new Buffer(process.env.AUTH0_CLIENT_SECRET, 'base64'),
+  audience: process.env.AUTH0_CLIENT_ID
+});
 
 // GraphQL server
 router.use( '/graphql', graphql );
-
-// Authentication server
-router.use( '/auth', auth );
-
-// Static assets server
-let oneYear = 365*86400000;
-router.use( express.static( path.resolve( __dirname + '/../public/' ), { maxAge: oneYear } ) );
 
 // Add extensions - custom configurations
 serverExtensions( router )

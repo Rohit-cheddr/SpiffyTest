@@ -10,7 +10,6 @@ import {spacing, typography, zIndex} from 'material-ui/styles';
 import { NavMenuTitle } from '../../configuration/webapp/components/ChromeSettings';
 import NavMenu from '../../configuration/webapp/components/NavMenu.jsx';
 
-
 class AppNavDrawer extends React.Component
 {
   _handle_onTouchTap_Drawer = ( ) =>
@@ -28,8 +27,8 @@ class AppNavDrawer extends React.Component
       onChangeList,
       open,
       style,
+      UserAuth
     } = this.props;
-
     return (
       <Drawer
         style={style}
@@ -54,10 +53,10 @@ class AppNavDrawer extends React.Component
           { NavMenuTitle }
         </div>
         <NavMenu
-          Viewer={ this.props.Viewer }
           value={ location.pathname }
           onChange={ onChangeList }
         />
+        {UserAuth}
       </Drawer>
     );
   }
@@ -70,10 +69,6 @@ AppNavDrawer.contextTypes = {
 
 export default Relay.createContainer( AppNavDrawer, {
   fragments: {
-    Viewer: () => Relay.QL`
-      fragment on Viewer {
-        ${ NavMenu.getFragment( 'Viewer' ) },
-      }
-    `,
+
   },
 } )
