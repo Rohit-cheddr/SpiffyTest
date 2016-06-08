@@ -8,11 +8,7 @@ import log from './log.js';
 import path from 'path';
 import process from 'process';
 
-<<<<<<< HEAD
-=======
-import auth from './auth'; // Authentication server
 import getLocalIP from '../scripts/getLocalIP'
->>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
 import graphql from '../graphql/server'; // GraphQL server
 import {name,version} from '../configuration/package'
 import publicURL from '../configuration/scripts/publicURL'
@@ -56,9 +52,6 @@ log.log( 'info', 'Starting application', {
 
 // Main router
 let router = express( );
-
-router.set( 'trust proxy', 'loopback' );
-router.set( 'x-powered-by', false );
 
 router.use( compression( ) );
 

@@ -42,7 +42,6 @@
     }
   },
   "dependencies": {
-<<<<<<< HEAD
     "auth0-lock": "^9.2.1",
     "babel-cli": "6.9.0",
     "babel-core": "6.9.1",
@@ -57,8 +56,6 @@
     "babel-relay-plugin": "0.9.0",
     "babel-relay-plugin-loader": "0.8.1",
     "babel-runtime": "6.9.2",
-=======
->>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
     "bcrypt": "0.8.6",
     "body-parser": "1.15.1",
     "cassandra-driver": "3.0.2",
@@ -73,21 +70,14 @@
     "eslint-plugin-react": "5.1.1",
     "express": "4.13.4",
     "express-graphql": "0.5.3",
-<<<<<<< HEAD
     "express-jwt": "^3.4.0",
     "extract-text-webpack-plugin": "1.0.1",
     "fbjs": "^0.8.3",
-    "graphql": "0.6.0",
-    "graphql-relay": "0.4.2",
-    "isomorphic-relay": "0.7.0-beta.0",
-    "isomorphic-relay-router": "0.8.0-beta.0",
     "json-loader": "^0.5.4",
-=======
     "graphql": "0.6.0",
     "graphql-relay": "0.4.2",
     "isomorphic-relay": "0.7.0",
     "isomorphic-relay-router": "0.8.0",
->>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
     "jwt-simple": "0.5.0",
     "material-ui": "0.15.0",
     "material-ui-country-flags": "3.0.1",
@@ -109,15 +99,11 @@
     "react-tap-event-plugin": "1.0.0",
     "relay-local-schema": "0.5.0",
     "replace": "0.3.0",
-<<<<<<< HEAD
     "style-loader": "0.13.1",
     "transform-loader": "^0.2.3",
     "webpack": "1.13.1",
     "winston": "2.2.0",
     "winston-cassandra": "0.4.0"
-=======
-    "winston": "2.2.0"
->>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
   },
   "devDependencies": {
     "babel-cli": "6.9.0",
@@ -152,18 +138,13 @@
     "webpack-dev-server": "1.14.1"
   },
   "name": "Cheddr",
-  "description": "Boilerplate + examples for React Native (iOS, Android), React (isomorphic, Material-UI), Relay, GraphQL, JWT, Node.js, Apache Cassandra",
+  "description": "",
   "homepage": "http://codefoundries.com/products/starter-kit.html",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codefoundries/UniversalRelayBoilerplate.git"
   },
-<<<<<<< HEAD
-  "version": "6.3.0",
-  "private": true,
-=======
   "version": "7.1.3",
-  "private": false,
->>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
+  "private": true,
   "license": "MIT"
 }
