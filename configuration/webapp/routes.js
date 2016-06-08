@@ -11,7 +11,6 @@ import MUI_Icons_CountryFlags from '../../units/urb-example-mui/webapp/component
 import MUI_Icons_CreditCards from '../../units/urb-example-mui/webapp/components/MUI_Icons_CreditCards';
 import MUI_Home from '../../units/urb-example-mui/webapp/components/MUI_Home';
 
-
 export const queries = {
 };
 

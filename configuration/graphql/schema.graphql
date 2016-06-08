@@ -13,4 +13,181 @@ interface Node {
 
 type Query {
   node(id: ID!): Node
+<<<<<<< HEAD
+=======
+  Viewer: Viewer
+}
+
+type ToDo implements Node {
+  id: ID!
+  ToDo_Text: String
+  ToDo_Complete: Boolean
+}
+
+input ToDo_addInput {
+  ToDo_Text: String!
+  clientMutationId: String!
+}
+
+type ToDo_addPayload {
+  ToDosEdge: ToDosEdge
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+input ToDo_deleteInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type ToDo_deletePayload {
+  deletedToDoId: ID
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+input ToDo_list_updateMarkAllInput {
+  ToDo_Complete: Boolean!
+  clientMutationId: String!
+}
+
+type ToDo_list_updateMarkAllPayload {
+  changedToDos: [ToDo]
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+input ToDo_updateRenameInput {
+  id: ID!
+  ToDo_Text: String!
+  clientMutationId: String!
+}
+
+type ToDo_updateRenamePayload {
+  ToDo: ToDo
+  clientMutationId: String!
+}
+
+input ToDo_updateStatusInput {
+  ToDo_Complete: Boolean!
+  id: ID!
+  clientMutationId: String!
+}
+
+type ToDo_updateStatusPayload {
+  ToDo: ToDo
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+type ToDosConnection {
+  pageInfo: PageInfo!
+  edges: [ToDosEdge]
+}
+
+type ToDosEdge {
+  node: ToDo
+  cursor: String!
+}
+
+type Translaticiarum implements Node {
+  id: ID!
+  Translaticiarum_Date: DateTime
+  Translaticiarum_Time: DateTime
+  Translaticiarum_Type: Int
+}
+
+input Translaticiarum_addInput {
+  Translaticiarum_Type: Int!
+  Translaticiarum_Date: DateTime!
+  Translaticiarum_Time: DateTime!
+  clientMutationId: String!
+}
+
+type Translaticiarum_addPayload {
+  TranslaticiarumsEdge: TranslaticiarumsEdge
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+input Translaticiarum_deleteInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type Translaticiarum_deletePayload {
+  deletedTranslaticiarumId: ID
+  Viewer: Viewer
+  clientMutationId: String!
+}
+
+input Translaticiarum_updateInput {
+  id: ID!
+  Translaticiarum_Type: Int!
+  Translaticiarum_Date: DateTime!
+  Translaticiarum_Time: DateTime!
+  clientMutationId: String!
+}
+
+type Translaticiarum_updatePayload {
+  Translaticiarum: Translaticiarum
+  clientMutationId: String!
+}
+
+type TranslaticiarumsConnection {
+  pageInfo: PageInfo!
+  edges: [TranslaticiarumsEdge]
+}
+
+type TranslaticiarumsEdge {
+  node: Translaticiarum
+  cursor: String!
+}
+
+type Viewer implements Node {
+  id: ID!
+  User_IsAnonymous: Boolean
+  User_AccountName: String
+  User_DisplayName: String
+  User_ProfilePhoto: String
+  User_Email: String
+  User_PhoneNumberMobile: String
+  User_Locale: String
+  UserToken2: String
+  compendiums(after: String, first: Int, before: String, last: Int): CompendiumsConnection
+  Ensayos(after: String, first: Int, before: String, last: Int): EnsayosConnection
+  Ensayo(id: ID): Ensayo
+  ToDos(status: String = "any", after: String, first: Int, before: String, last: Int): ToDosConnection
+  ToDo_TotalCount: Int
+  ToDo_CompletedCount: Int
+  Translaticiarums(after: String, first: Int, before: String, last: Int): TranslaticiarumsConnection
+}
+
+input Viewer_updateInput {
+  id: ID!
+  User_DisplayName: String!
+  User_ProfilePhoto: String!
+  User_Email: String!
+  User_PhoneNumberMobile: String!
+  User_Locale: String!
+  clientMutationId: String!
+}
+
+input Viewer_updatePasswordInput {
+  id: ID!
+  User_AccountPassword_Current: String!
+  User_AccountPassword: String!
+  clientMutationId: String!
+}
+
+type Viewer_updatePasswordPayload {
+  Viewer: Viewer
+  ErrorMessage: String
+  clientMutationId: String!
+}
+
+type Viewer_updatePayload {
+  Viewer: Viewer
+  clientMutationId: String!
+>>>>>>> codefoundries/master
 }

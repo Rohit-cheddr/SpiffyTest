@@ -7,13 +7,11 @@ import publicURL from '../configuration/scripts/publicURL'
 
 export default class NetworkLayer
 {
-
   static injectNetworkLayer( )
   {
     const graphQLServerURL = publicURL + '/graphql';
 
     let headers = { }
-
     // TODO: equivalent of RelayContext.reset( )
 
     // Uncomment for connection to server in the cloud. Smarter way to do this will be needed.

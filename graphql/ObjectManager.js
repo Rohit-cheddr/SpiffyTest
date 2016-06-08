@@ -42,7 +42,7 @@ export default class ObjectManager
       TriggersForRemove: [ ]
     }
   }
-  
+
   setReq (request)
   {
     this.req = request;

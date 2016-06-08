@@ -23,11 +23,10 @@ injectTapEventPlugin( );
 // Retrieve prepared data
 const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 
-
+var token = localStorage.getItem('id_token');
 // Where is the GraphQL server?
 const graphQLServerURL = publicURL + '/graphql';
 
-var token = localStorage.getItem('id_token');
 // Create Relay environment
 // Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
 const environment = new Relay.Environment( );
@@ -40,6 +39,7 @@ environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
     }
   )
 );
+IsomorphicRelay.injectPreparedData(environment, data);
 
 IsomorphicRelay.injectPreparedData(environment, data);
 const rootElement = document.getElementById('root');

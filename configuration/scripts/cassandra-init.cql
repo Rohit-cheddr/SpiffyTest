@@ -20,10 +20,6 @@ CREATE TABLE logs(
 );
 // Does not seem to resolve the problem anyway, but let's keep it here for now.
 
-
-
-
-
 CREATE TABLE "Compendium"(
   "id" uuid PRIMARY KEY,
   "Compendium_User_id" uuid,
