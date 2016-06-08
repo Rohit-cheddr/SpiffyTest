@@ -8,7 +8,14 @@ import log from './log.js';
 import path from 'path';
 import process from 'process';
 
+<<<<<<< HEAD
+=======
+import auth from './auth'; // Authentication server
+import getLocalIP from '../scripts/getLocalIP'
+>>>>>>> 707ab29e27ce46019caeaf302d95f06e42f95aea
 import graphql from '../graphql/server'; // GraphQL server
+import {name,version} from '../configuration/package'
+import publicURL from '../configuration/scripts/publicURL'
 import serverExtensions from '../configuration/server/serverExtensions'
 import webapp from '../webapp/server'; // Isomorphic React server
 
@@ -34,15 +41,16 @@ if( objectPersistence == 'cassandra' )
 
 // Log starting application
 log.log( 'info', 'Starting application', {
-  npm_package_name: process.env.npm_package_name,
-  npm_package_version: process.env.npm_package_version,
+  name: name,
+  version: version,
   NODE_ENV: process.env.NODE_ENV,
   HOST: process.env.HOST,
   PORT: process.env.PORT,
-  PUBLIC_URL: process.env.PUBLIC_URL,
+  publicURL: publicURL,
   process_title: process.title,
   process_pid: process.pid,
   objectPersistence: objectPersistence,
+  IP: getLocalIP( ),
   ...persistenceInformation
 } );
 

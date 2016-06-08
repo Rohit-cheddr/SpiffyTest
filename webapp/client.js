@@ -7,12 +7,10 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory, match } from 'react-router';
 import Relay from 'react-relay';
 
-import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
+import publicURL from '../configuration/scripts/publicURL'
 import routes from '../configuration/webapp/routes';
 
 import './styles/main.css';
-
-var isoVars = isomorphicVars( );
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -26,14 +24,15 @@ injectTapEventPlugin( );
 const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 
 
-// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
-let GraphQL_URL = ( isoVars.PUBLIC_URL == null ) ? '/graphql' : isoVars.PUBLIC_URL + '/graphql';
+// Where is the GraphQL server?
+const graphQLServerURL = publicURL + '/graphql';
 
 var token = localStorage.getItem('id_token');
 // Create Relay environment
+// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
 const environment = new Relay.Environment( );
 environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
-    GraphQL_URL,
+    graphQLServerURL,
     {
       headers: {
         Authorization: 'Bearer ' + token
