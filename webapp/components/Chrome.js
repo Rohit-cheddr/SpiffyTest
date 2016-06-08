@@ -9,12 +9,13 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import spacing from 'material-ui/styles/spacing';
 import withWidth, {LARGE, MEDIUM}  from '../scripts/withWidth';
 
-import AppNavDrawer from './AppNavDrawer.jsx';
 import UserAuth from './UserAuth.jsx';
-import ChromeHelmet from '../../configuration/webapp/components/ChromeHelmet.jsx';
-import Footer from '../../configuration/webapp/components/Footer.jsx';
+import AppNavDrawer from './AppNavDrawer';
+import ChromeHelmet from '../../configuration/webapp/components/ChromeHelmet';
 import { MainScreenTitle } from '../../configuration/webapp/components/ChromeSettings';
+import Footer from '../../configuration/webapp/components/Footer';
 import muiTheme from '../../configuration/webapp/muiTheme.js';
+
 
 var canUseDOM = !!(
   (typeof window !== 'undefined' &&
@@ -191,10 +192,9 @@ Chrome.childContextTypes = {
 
 //
 
-// It is important to retrieve User_Token2, since it is used in client.js
+// It is important to retrieve UserToken2, since it is used in client.js
 export default Relay.createContainer( withWidth( )( Chrome ), {
 //export default Relay.createContainer( Chrome, {
   fragments: {
-
   },
 });

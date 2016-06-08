@@ -12,8 +12,6 @@ import routes from '../configuration/webapp/routes';
 
 import './styles/main.css';
 
-var isoVars = isomorphicVars( );
-
 //Needed for onTouchTap
 //Can go away when react 1.0 release
 //Check this repo:
@@ -21,19 +19,21 @@ var isoVars = isomorphicVars( );
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin( );
 
+const isoVars = isomorphicVars( );
 
 // Retrieve prepared data
 const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 
-
-// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
-let GraphQL_URL = ( isoVars.PUBLIC_URL == null ) ? '/graphql' : isoVars.PUBLIC_URL + '/graphql';
-
 var token = localStorage.getItem('id_token');
+
+// Where is the GraphQL server?
+const graphQLServerURL = isoVars.PUBLIC_URL + '/graphql';
+
 // Create Relay environment
+// Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
 const environment = new Relay.Environment( );
 environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
-    GraphQL_URL,
+    graphQLServerURL,
     {
       headers: {
         Authorization: 'Bearer ' + token
@@ -41,6 +41,8 @@ environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
     }
   )
 );
+
+IsomorphicRelay.injectPreparedData(environment, data);
 
 IsomorphicRelay.injectPreparedData(environment, data);
 const rootElement = document.getElementById('root');

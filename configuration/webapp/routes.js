@@ -4,13 +4,12 @@ import React from 'react';
 import { createRoutes, IndexRoute, Route } from 'react-router';
 //import Relay from 'react-relay';
 
-import Chrome from '../../webapp/components/Chrome.jsx';
-import HomeScreen from './components/HomeScreen.jsx';
-import MUI_Icons from '../../units/urb-example-mui/webapp/components/MUI_Icons.jsx';
-import MUI_Icons_CountryFlags from '../../units/urb-example-mui/webapp/components/MUI_Icons_CountryFlags.jsx';
-import MUI_Icons_CreditCards from '../../units/urb-example-mui/webapp/components/MUI_Icons_CreditCards.jsx';
-import MUI_Home from '../../units/urb-example-mui/webapp/components/MUI_Home.jsx';
-
+import Chrome from '../../webapp/components/Chrome';
+import HomeScreen from './components/HomeScreen';
+import MUI_Icons from '../../units/urb-example-mui/webapp/components/MUI_Icons';
+import MUI_Icons_CountryFlags from '../../units/urb-example-mui/webapp/components/MUI_Icons_CountryFlags';
+import MUI_Icons_CreditCards from '../../units/urb-example-mui/webapp/components/MUI_Icons_CreditCards';
+import MUI_Home from '../../units/urb-example-mui/webapp/components/MUI_Home';
 
 export const queries = {
 };

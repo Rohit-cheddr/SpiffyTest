@@ -3,16 +3,15 @@ import Relay, {
   RelayContext
 } from 'react-relay';
 
+import publicURL from '../configuration/scripts/publicURL'
 
 export default class NetworkLayer
 {
-
   static injectNetworkLayer( )
   {
-    const graphQLServerURL = "http://localhost:4444/graphql";
+    const graphQLServerURL = publicURL + '/graphql';
 
     let headers = { }
-
     // TODO: equivalent of RelayContext.reset( )
 
     // Uncomment for connection to server in the cloud. Smarter way to do this will be needed.
