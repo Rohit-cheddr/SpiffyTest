@@ -35,20 +35,27 @@ if( objectPersistence == 'cassandra' )
   persistenceInformation.CASSANDRA_CONNECTION_POINTS = process.env.CASSANDRA_CONNECTION_POINTS;
 }
 
-// Log starting application
-log.log( 'info', 'Starting application', {
-  name: name,
-  version: version,
-  NODE_ENV: process.env.NODE_ENV,
-  HOST: process.env.HOST,
-  PORT: process.env.PORT,
-  publicURL: publicURL,
-  process_title: process.title,
-  process_pid: process.pid,
-  objectPersistence: objectPersistence,
-  IP: getLocalIP( ),
+const startupInformation =
+{
+  name:                 name,
+  version:              version,
+
+  NODE_ENV:             process.env.NODE_ENV,
+  HOST:                 process.env.HOST,
+  PORT:                 process.env.PORT,
+  PUBLIC_URL:           process.env.PUBLIC_URL,
+
+  process_title:        process.title,
+  process_pid:          process.pid,
+  local_ip:             getLocalIP( ),
+
+  objectPersistence:    objectPersistence,
   ...persistenceInformation
-} );
+}
+
+// Log starting application, also print to console
+log.log( 'info', 'Starting application', startupInformation );
+console.log( startupInformation )
 
 // Main router
 let router = express( );

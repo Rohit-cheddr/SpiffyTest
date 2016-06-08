@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import { Router, browserHistory, match } from 'react-router';
 import Relay from 'react-relay';
 
-import publicURL from '../configuration/scripts/publicURL'
+import isomorphicVars from '../configuration/webapp/scripts/isomorphicVars';
 import routes from '../configuration/webapp/routes';
 
 import './styles/main.css';
@@ -19,13 +19,15 @@ import './styles/main.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin( );
 
+const isoVars = isomorphicVars( );
 
 // Retrieve prepared data
 const data = JSON.parse( document.getElementById( 'preloadedData' ).textContent );
 
 var token = localStorage.getItem('id_token');
+
 // Where is the GraphQL server?
-const graphQLServerURL = publicURL + '/graphql';
+const graphQLServerURL = isoVars.PUBLIC_URL + '/graphql';
 
 // Create Relay environment
 // Ensure that on the client Relay is passing the HttpOnly cookie with auth, and the user auth token
@@ -39,6 +41,7 @@ environment.injectNetworkLayer( new Relay.DefaultNetworkLayer(
     }
   )
 );
+
 IsomorphicRelay.injectPreparedData(environment, data);
 
 IsomorphicRelay.injectPreparedData(environment, data);
